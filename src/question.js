@@ -5,8 +5,8 @@ var getDb = (function () {
     if (db === null) {
       db = new AWS.DynamoDB({
       region: 'us-east-1',
-      accessKeyId: 'AKIAIOP2T4XJJFOX4F4A',
-      secretAccessKey: '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',
+      accessKeyId: '',
+      secretAccessKey: '',
       maxRetries: 5,
       sslEnabled: true,
       logger: console
