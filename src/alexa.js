@@ -44,7 +44,7 @@ var ResponseBuilder = (function () {
     });
   }
 
-  var proto = ResponseBuilder.proto;
+  var proto = ResponseBuilder.prototype;
   addSetterTo(proto, 'speech');
   addSetterTo(proto, 'reprompt');
   addSetterTo(proto, 'cardTitle');
@@ -54,11 +54,11 @@ var ResponseBuilder = (function () {
   return ResponseBuilder;
 })();
 
-function App(defition, event, context) {
+function App(definition, event, context) {
   extend(this, {
     applicationId: null,
     appName: 'Alexa App',
-  }, appDefinition);
+  }, definition);
 
   this.request = null;
   this.session = null;

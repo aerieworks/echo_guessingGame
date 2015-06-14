@@ -54,17 +54,20 @@ extend(MachineBuilder.prototype, {
       console.log('MachineBuilder: Has state ' + name);
       this.currentState = { name: name, handler: handler, transitions: {} };
       this.states.push(this.currentState);
+      return this;
     },
 
   transitionsTo:
     function transitionsTo(input, toStateName) {
       console.log('MachineBuilder: \t[' + this.currentState.name + '] + <' + input + '> = [' + toStateName + ']');
       this.currentState.transitions[input] = toStateName;
+      return this;
     },
 
   withOnStateChanged:
     function withOnStateChanged(handler) {
       this.onStateChanged = handler;
+      return this;
     },
 
   build:

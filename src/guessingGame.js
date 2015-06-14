@@ -5,7 +5,7 @@ var Alexa = require('./alexa.js');
 
 var States = {
   Launch: 'launch',
-  WaitingForPlayer, 'waitingForPlayer',
+  WaitingForPlayer: 'waitingForPlayer',
   StartGame: 'startGame',
   LoadQuestion: 'loadQuestion',
   QuestionResponse: 'questionResponse',
@@ -25,7 +25,7 @@ var theGame = (function () {
 
   var startPrompt = 'Are you ready to play?';
   return new SM.MachineBuilder()
-    .withState(States.Launch, function launchHandler(machine) {
+    .addState(States.Launch, function launchHandler(machine) {
         this.app.buildResponse()
           .speech('Welcome to The Guessing Game.  Think of something, and I will try to figure out what it is by asking you Yes or No questions.  ' + startPrompt)
           .reprompt(startPrompt)
@@ -34,7 +34,7 @@ var theGame = (function () {
       .transitionsTo(Intents.ResponseYes, States.StartGame)
       .transitionsTo(Intents.ResponseNo, States.WaitingForPlayer)
 
-    .withState(States.WaitingForPlayer, function waitingForPlayerHandler(machine) {
+    .addState(States.WaitingForPlayer, function waitingForPlayerHandler(machine) {
         this.buildResponse()
           .speech('OK.  I can give you more time.' + startPrompt)
           .reprompt(startPrompt)
@@ -43,12 +43,12 @@ var theGame = (function () {
       .transitionsTo(Intents.ResponseYes, States.StartGame)
       .transitionsTo(Intents.ResponseNo, States.WaitingForPlayer)
 
-    .withState(States.StartGame, function startGameHandler(machine) {
+    .addState(States.StartGame, function startGameHandler(machine) {
         this.pushQuestion(Question.firstQuestionId);
         machine.transitionTo(States.LoadQuestion, this);
       })
 
-    .withState(States.LoadQuestion, function loadQuestionHandler(machine) {
+    .addState(States.LoadQuestion, function loadQuestionHandler(machine) {
         this.getCurrentQuestion(function (question) {
           if (question.isAnswer()) {
             machine.transitionTo(States.GuessAnswer, this);
@@ -58,7 +58,7 @@ var theGame = (function () {
         });
       })
 
-    .withState(States.AskQuestion, function askQuestionHandler(machine) {
+    .addState(States.AskQuestion, function askQuestionHandler(machine) {
         this.getCurrentQuestion(function (question) {
           this.buildResponse()
             .speech(question.getQuestionSpeech())
@@ -69,7 +69,7 @@ var theGame = (function () {
       .transitionsTo(Intents.ResponseYes, States.QuestionResponse)
       .transitionsTo(Intents.ResponseNo, States.QuestionResponse)
 
-    .withState(States.QuestionResponse, function questionResponseHandler(machine) {
+    .addState(States.QuestionResponse, function questionResponseHandler(machine) {
         this.getCurrentQuestion(function (question) {
           var intent = this.request.intent.name;
           this.pushQuestion(intent == Intents.ResponseYes ? question.if_yes : question.if_no);
@@ -77,7 +77,7 @@ var theGame = (function () {
         });
       })
 
-    .withState(States.GuessAnswer, function guessAnswerHandler(machine) {
+    .addState(States.GuessAnswer, function guessAnswerHandler(machine) {
         this.getCurrentQuestion(function (question) {
           this.buildResponse()
             .speech('OK, I think I\'ve got it.  ' + question.getQuestionSpeech())
@@ -88,14 +88,14 @@ var theGame = (function () {
       .transitionsTo(Intents.ResponseYes, States.AnswerCorrect)
       .transitionsTo(Intents.ResponseNo, States.AnswerIncorrect)
 
-    .withState(States.AnswerCorrect, function answerCorrectHandler(machine) {
+    .addState(States.AnswerCorrect, function answerCorrectHandler(machine) {
         this.buildResponse()
           .speech('Yay, I win!  That was fun.  We should play again sometime.')
           .shouldEndSession(true)
           .send();
       })
 
-    .withState(States.AnswerIncorrect, function answerIncorrectHandler(machine) {
+    .addState(States.AnswerIncorrect, function answerIncorrectHandler(machine) {
         this.buildResponse()
           .speech('Oh.  Congratulations, you stumped me!  I guess I\'m not as smart as I thought I was.')
           .shouldEndSession(true)
@@ -107,7 +107,6 @@ var theGame = (function () {
         this.session.state = stateName;
       })
     .build();
-  });
 })();
 
 exports.handler = Alexa.getRequestHandler({
@@ -151,5 +150,3 @@ exports.handler = Alexa.getRequestHandler({
       this.currentQuestion = null;
     }
 });
-
-
