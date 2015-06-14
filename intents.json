@@ -1,0 +1,29 @@
+{
+  "intents":  [
+    {
+      "intent": "ResponseYes",
+      "slots": []
+    },
+    {
+      "intent": "ResponseNo",
+      "slots": []
+    },
+    {
+      "intent": "DescribeWhatItIs",
+      "slots": [
+        {
+          "name": "Description",
+          "value": "LITERAL"
+        }
+      ]
+    },
+    {
+      "intent": "DescribeWhatItHas",
+      "slots": [
+        {
+          "name": "Description",
+          "value": "LITERAL"
+        }
+      ]
+  ]
+}

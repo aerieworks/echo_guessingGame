@@ -1,0 +1,8 @@
+ResponseYes yes.
+ResponseNo  no.
+DescribeWhatItIs It is {dynamite|Answer}.
+DescribeWhatItIs It is {the Pentagon|Answer}.
+DescribeWhatItIs It is {a television|Answer}.
+DescribeWhatItIs It is {an ocelot|Answer}.
+DescribeWhatItHas It has {a fuse|Answer}.
+DescribeWhatItHas It has {five sides|Answer}.

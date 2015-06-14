@@ -1,0 +1,24 @@
+Questions
+  question_id     id
+  question_type   enum { is_a, has_a }
+  description     String
+  next_question   id
+
+{
+  id: 1,
+  question_type: "is_a",
+  description: "an animal",
+  next_question: 3
+},
+{
+  id: 2,
+  question_type: "has_a",
+  description: "a cat",
+  next_question: null
+}
+{
+  id: 3,
+  question_type: "has_a",
+  description: "a tail",
+  next_question: 2
+}
