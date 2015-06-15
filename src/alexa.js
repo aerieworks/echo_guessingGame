@@ -99,15 +99,15 @@ function handleRequest(app, event, context) {
     app.initializeSession();
   }
 
-  console.log('Alexa: Session state: ' + JSON.stringify(app.session));
+  console.debug('Alexa: Session state: ' + JSON.stringify(app.session));
   if (this.request.type === 'LaunchRequest') {
-    console.log('Alexa: New app launch.');
+    console.debug('Alexa: New app launch.');
     app.launch();
   } else if (this.request.type === 'IntentRequest') {
-    console.log('Alexa: Handling intent <' + this.request.intent.name + '>');
+    console.debug('Alexa: Handling intent <' + this.request.intent.name + '>');
     app.handleIntent(this.request.intent);
   } else if (this.request.type === 'SessionEndedRequest') {
-    console.log('Alexa: Ending session.');
+    console.debug('Alexa: Ending session.');
     app.end();
   }
 }
@@ -129,6 +129,7 @@ function getRequestHandler(appDefinition) {
       var app = new App(appDefinition);
       app.handleRequest(event, context);
     } catch (e) {
+      console.error('Alexa.handleRequest: %s', e, new Error(e).stack);
       context.fail('Exception: ' + e);
     }
   };

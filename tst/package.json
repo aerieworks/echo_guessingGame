@@ -1,0 +1,34 @@
+{
+  "name": "com.aerieworks.guessingGame.test",
+  "version": "1.0.0",
+  "description": "Unit tests for The Guessing Game",
+  "keywords": [
+    "guessingGame",
+    "aerieworks"
+  ],
+  "author": {
+    "name": "Annabelle Richard",
+    "email": "annabelle.e.richard@gmail.com",
+    "url": "https://twitter.com/annabellerings"
+  },
+  "dependencies": {
+    "node.extend": "1.1.5",
+    "nodeunit": "^0.9.1",
+    "uuid": "2.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aerieworks/echo_guessingGame.git"
+  },
+  "contributors": [
+    {
+      "name": "Annabelle Richard",
+      "email": "annablle.e.richard@gmail.com",
+      "url": "https://twitter.com/annabellerings"
+    }
+  ],
+  "main": "index",
+  "engines": [
+    "node >= 0.4"
+  ]
+}
